@@ -1,13 +1,10 @@
-import { MongoMemoryServer } from "mongodb-memory-server";
 import mongoose from "mongoose";
-import { app } from "../app";
-
-let mongo: any;
 
 beforeAll(async () => {
-  mongo = new MongoMemoryServer();
-  const mongoUri = await mongo.getUri();
+  jest.setTimeout(60000); // 60 seconds timeout
+  process.env.JWT_KEY = "asdf";
 
+  const mongoUri = "mongodb://localhost:27017/test"; // Local MongoDB instance
   await mongoose.connect(mongoUri);
 });
 
@@ -19,6 +16,5 @@ beforeEach(async () => {
 });
 
 afterAll(async () => {
-  await mongo.stop();
   await mongoose.connection.close();
 });
