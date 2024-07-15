@@ -9,7 +9,6 @@ const start = async () => {
   if (!process.env.MONGO_URI) {
     throw new Error("Mongo URI should be present");
   }
-
   try {
     await mongoose.connect(process.env.MONGO_URI!);
     console.log("Connected to mongoDB");

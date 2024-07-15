@@ -7,7 +7,7 @@ export default () => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const { doRequest, errors } = useRequest({
-    url: "/api/users/signup",
+    url: "/api/users/signin",
     method: "post",
     body: {
       email,
@@ -25,7 +25,7 @@ export default () => {
 
   return (
     <form onSubmit={onSubmit}>
-      <h1>Sign Up</h1>
+      <h1>Sign In</h1>
       <div className="form-group">
         <label>Email Address</label>
         <input
@@ -45,7 +45,7 @@ export default () => {
       </div>
       {errors}
       <button disabled={loading} className="btn btn-primary">
-        {loading ? "loading" : "Sign Up"}
+        {loading ? "loading" : "Sign In"}
       </button>
     </form>
   );
