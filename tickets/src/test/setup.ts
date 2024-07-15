@@ -40,5 +40,6 @@ afterAll(async () => {
   const base64 = Buffer.from(sessionJSON).toString("base64");
 
   // return a string thats the cookie with the encoded data
+  console.log("base64", base64);
   return `session=${base64}`;
 };
