@@ -5,6 +5,7 @@ import cookieSession from "cookie-session";
 
 import { createTicketRouter } from "./routes/new";
 import { currentUser } from "@chello12/common";
+import { ShowTicketRouter } from "./routes/show";
 
 const app = express();
 
@@ -19,5 +20,6 @@ app.use(
 
 app.use(currentUser);
 app.use(createTicketRouter);
+app.use(ShowTicketRouter);
 
 export { app };
