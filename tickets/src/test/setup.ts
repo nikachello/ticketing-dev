@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { mongo } from "mongoose";
 import jwt from "jsonwebtoken";
 
 beforeAll(async () => {
@@ -23,7 +23,7 @@ afterAll(async () => {
 (global as any).signin = async () => {
   // Build a JWT payload {id, email}
   const payload = {
-    id: "123567",
+    id: new mongoose.Types.ObjectId().toHexString(),
     email: "guest@guests.com",
   };
 
