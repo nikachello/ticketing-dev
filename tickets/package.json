@@ -12,7 +12,8 @@
     "testEnvironenment": "node",
     "setupFilesAfterEnv": [
       "./src/test/setup.ts"
-    ]
+    ],
+    "maxWorkers": 1
   },
   "keywords": [],
   "author": "",
