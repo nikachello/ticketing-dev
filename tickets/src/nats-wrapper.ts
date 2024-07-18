@@ -1,4 +1,5 @@
 import nats, { Stan } from "node-nats-streaming";
+import { TicketCreatedListener } from "./events/listeners/ticket-created-listener";
 
 class NatsWrapper {
   private _client?: Stan;
@@ -17,6 +18,7 @@ class NatsWrapper {
     return new Promise((resolve, reject) => {
       this.client.on("connect", () => {
         console.log("Connected to NATS");
+        new TicketCreatedListener(this.client).listen();
         resolve();
       });
       this.client.on("error", (err) => {
