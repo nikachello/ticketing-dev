@@ -1,6 +1,8 @@
 import mongoose, { mongo } from "mongoose";
 import jwt from "jsonwebtoken";
 
+jest.mock("../nats-wrapper.ts");
+
 beforeAll(async () => {
   jest.setTimeout(60000); // 60 seconds timeout
   process.env.JWT_KEY = "asdf";
@@ -10,6 +12,7 @@ beforeAll(async () => {
 });
 
 beforeEach(async () => {
+  jest.clearAllMocks();
   const collections = await mongoose.connection.db.collections();
   for (let collection of collections) {
     await collection.deleteMany({});

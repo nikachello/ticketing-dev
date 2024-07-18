@@ -11,8 +11,24 @@ const start = async () => {
     throw new Error("Mongo URI should be present");
   }
 
+  if (!process.env.NATS_CLUSTER_ID) {
+    throw new Error("NATS cluster ID should be present");
+  }
+
+  if (!process.env.NATS_CLIENT_ID) {
+    throw new Error("NATS client ID should be present");
+  }
+
+  if (!process.env.NATS_URL) {
+    throw new Error("NATS url should be present");
+  }
+
   try {
-    await natsWrapper.connect("ticketing", "qwerty", "http://nats-srv:4222");
+    await natsWrapper.connect(
+      process.env.NATS_CLUSTER_ID,
+      process.env.NATS_CLIENT_ID,
+      process.env.NATS_URL
+    );
 
     natsWrapper.client.on("close", () => {
       console.log("NATS connection closed");
