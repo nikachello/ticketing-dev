@@ -57,8 +57,6 @@ it("reserves a ticket", async () => {
 
 // it("emits an order created event", async () => {
 //   const ticket = Ticket.build({
-
-//     id: user.id,
 //     title: "title",
 //     price: 20,
 //   });
