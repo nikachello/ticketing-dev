@@ -35,6 +35,11 @@ const start = async () => {
       process.exit();
     });
 
+    natsWrapper.client.on("disconnect", () => {
+      console.log("disconnected");
+      process.exit();
+    });
+
     process.on("SIGINT", () => natsWrapper.client!.close());
     process.on("SIGTERM", () => natsWrapper.client!.close());
 
