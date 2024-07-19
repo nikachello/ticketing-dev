@@ -3,11 +3,11 @@ import "express-async-errors";
 import { json } from "body-parser";
 import cookieSession from "cookie-session";
 
-import { createTicketRouter } from "./routes/new";
 import { currentUser } from "@chello12/common";
-import { showTicketRouter } from "./routes/show";
-import { indexTicketRouter } from "./routes";
-import { updateTicketRouter } from "./routes/update";
+import { indexOrderRouter } from "./routes";
+import { newOrderRouter } from "./routes/new";
+import { deleteOrderRouter } from "./routes/delete";
+import { showOrderRouter } from "./routes/show";
 
 const app = express();
 
@@ -21,9 +21,9 @@ app.use(
 );
 
 app.use(currentUser);
-app.use(createTicketRouter);
-app.use(showTicketRouter);
-app.use(indexTicketRouter);
-app.use(updateTicketRouter);
+app.use(indexOrderRouter);
+app.use(newOrderRouter);
+app.use(deleteOrderRouter);
+app.use(showOrderRouter);
 
 export { app };

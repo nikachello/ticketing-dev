@@ -1,5 +1,4 @@
 import nats, { Stan } from "node-nats-streaming";
-import { TicketCreatedListener } from "./events/listeners/ticket-created-listener";
 
 class NatsWrapper {
   private _client?: Stan;
