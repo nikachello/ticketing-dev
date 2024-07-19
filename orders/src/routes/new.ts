@@ -50,7 +50,7 @@ router.post(
 
     // Publish an event saying that an order was created
 
-    res.send({ order });
+    res.status(201).send({ order });
   }
 );
 
