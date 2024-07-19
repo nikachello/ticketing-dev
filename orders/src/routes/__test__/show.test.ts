@@ -7,6 +7,7 @@ it("fetches the order", async () => {
 
   // Create a ticket
   const ticket = Ticket.build({
+    id: user.id,
     title: "title",
     price: 20,
   });

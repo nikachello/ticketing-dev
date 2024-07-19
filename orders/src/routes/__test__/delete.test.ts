@@ -8,6 +8,7 @@ it("sets status to cancel for an order", async () => {
   const user = await (global as any).signin();
 
   const ticket = Ticket.build({
+    id: user.id,
     title: "title",
     price: 30,
   });
@@ -34,6 +35,7 @@ it("emits an event that order is cancelled", async () => {
   const user = await (global as any).signin();
 
   const ticket = Ticket.build({
+    id: user.id,
     title: "title",
     price: 30,
   });
