@@ -15,10 +15,13 @@ it("has a route handler listening to /api/tickets for post request", async () =>
 
 it("returns a status other than 401 if the user is signed in", async () => {
   // Make a POST request to create a ticket with the cookie set
+  const user = await (global as any).signin();
   const response = await request(app)
     .post("/api/tickets/")
-    .set("Cookie", await (global as any).signin())
+    .set("Cookie", user)
     .send({});
+
+  console.log("user", user);
 
   // Assert that the response status code is not 401
   expect(response.status).not.toBe(401);
