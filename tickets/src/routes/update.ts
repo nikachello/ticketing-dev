@@ -4,6 +4,7 @@ import {
   ValidateRequest,
   requireAuth,
   NotAuthorizedError,
+  badRequestError,
 } from "@chello12/common";
 import { Ticket } from "../models/ticket";
 import { TicketUpdatedPublisher } from "../events/publishers/ticket-updated-publisher";
@@ -25,6 +26,10 @@ router.put(
     const ticket = await Ticket.findById(req.params.id);
     if (!ticket) {
       res.status(404).send("Not found");
+    }
+
+    if (ticket?.orderId) {
+      throw new badRequestError("Sorry, you can't edit a reserver ticket");
     }
 
     if (ticket?.userId !== req.currentUser?.id) {
