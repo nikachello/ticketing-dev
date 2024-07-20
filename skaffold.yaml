@@ -38,3 +38,11 @@ build:
         manual:
           - src: "**/*.ts"
             dest: .
+    - image: us.gcr.io/cedar-gearbox-429114-v2/expiration
+      context: expiration
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "src/**/*.ts"
+            dest: .
