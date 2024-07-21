@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: orders
-          image: us.gcr.io/cedar-gearbox-429114-v2/orders
+          image: ticketing.azurecr.io/orders
           env:
             - name: NATS_CLIENT_ID
               valueFrom:

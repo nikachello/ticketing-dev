@@ -6,7 +6,7 @@ deploy:
       - ./infra/k8s/*
 build:
   artifacts:
-    - image: us.gcr.io/cedar-gearbox-429114-v2/auth
+    - image: ticketing.azurecr.io/auth
       context: auth
       docker:
         dockerfile: Dockerfile
@@ -14,7 +14,7 @@ build:
         manual:
           - src: "src/**/*.ts"
             dest: .
-    - image: us.gcr.io/cedar-gearbox-429114-v2/tickets
+    - image: ticketing.azurecr.io/tickets
       context: tickets
       docker:
         dockerfile: Dockerfile
@@ -22,7 +22,7 @@ build:
         manual:
           - src: "src/**/*.ts"
             dest: .
-    - image: us.gcr.io/cedar-gearbox-429114-v2/client
+    - image: ticketing.azurecr.io/client
       context: client
       docker:
         dockerfile: Dockerfile
@@ -30,7 +30,7 @@ build:
         manual:
           - src: "**/*.js"
             dest: .
-    - image: us.gcr.io/cedar-gearbox-429114-v2/orders
+    - image: ticketing.azurecr.io/orders
       context: orders
       docker:
         dockerfile: Dockerfile
@@ -38,8 +38,16 @@ build:
         manual:
           - src: "**/*.ts"
             dest: .
-    - image: us.gcr.io/cedar-gearbox-429114-v2/expiration
+    - image: ticketing.azurecr.io/expiration
       context: expiration
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "src/**/*.ts"
+            dest: .
+    - image: ticketing.azurecr.io/payments
+      context: payments
       docker:
         dockerfile: Dockerfile
       sync:
