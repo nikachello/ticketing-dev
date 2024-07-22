@@ -8,8 +8,10 @@ import {
   NotAuthorizedError,
   OrderStatus,
 } from "@chello12/common";
-
+import { Payment } from "../models/payment";
 import { Order } from "../models/order";
+import { PaymentCreatedPublisher } from "../events/publishers/payment-created-publisher";
+import { natsWrapper } from "../nats-wrapper";
 
 const router = express.Router();
 
@@ -31,7 +33,7 @@ router.post(
       throw new badRequestError("Order is cancelled");
     }
 
-    const payment = await stripe.paymentIntents.create({
+    const charge = await stripe.paymentIntents.create({
       amount: order!.price,
       currency: "usd",
       confirm: true,
@@ -39,7 +41,18 @@ router.post(
       automatic_payment_methods: { enabled: true, allow_redirects: "never" },
     });
 
-    res.send({ success: payment });
+    const payment = Payment.build({
+      orderId,
+      stripeId: charge.id,
+    });
+    await payment.save();
+    new PaymentCreatedPublisher(natsWrapper.client).publish({
+      id: payment.id,
+      orderId: payment.orderId,
+      stripeId: payment.stripeId,
+    });
+
+    res.send({ id: payment.id });
   }
 );
 
